@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Jackson Fan Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        header {
+            background-color: #000;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+        section {
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        button {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #444;
+        }
+        iframe {
+            margin: 20px auto;
+            display: block;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Michael Jackson Fan Page</h1>
+        <p>Explore songs, videos, and pictures of the King of Pop!</p>
+    </header>
+
+    <section id="videos">
+        <h2>Watch Music Videos</h2>
+        <button onclick="playVideo('https://www.youtube.com/embed/sOnqjkJTMaA')">Thriller</button>
+        <button onclick="playVideo('https://www.youtube.com/embed/Zi_XLOBDo_Y')">Beat It</button>
+        <button onclick="playVideo('https://www.youtube.com/embed/F2AitTPI5U0?si=cMMRRdS-8E0J3Uwa')">New Video</button>
+        <iframe id="video-player" width="560" height="315" src="" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+    </section>
+
+    <script>
+        function playVideo(url) {
+            const iframe = document.getElementById('video-player');
+            iframe.src = url;
+        }
+    </script>
+</body>
+</html>
