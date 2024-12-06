@@ -50,6 +50,21 @@
         <p>Explore songs, videos, and pictures of the King of Pop!</p>
     </header>
 
+    <!-- Search Section -->
+    <section>
+        <h2>Search for Michael Jackson Songs</h2>
+        <form class="search-bar" onsubmit="searchSong(event)">
+            <input type="text" id="searchQuery" placeholder="Enter song or video name">
+            <input type="submit" value="Search">
+        </form>
+        <iframe id="search-result" width="560" height="315" src=""
+            title="Search Result" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>
+    </section>    
+
+    <!-- Video Section -->    
     <section id="videos">
         <h2>Watch Music Videos</h2>
         <button onclick="playVideo('https://www.youtube.com/embed/xaYSqjvZjTs')">Chicago</button>
@@ -61,6 +76,16 @@
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
         </iframe>
     </section>
+    
+    <!-- Images Section -->
+    <section>
+        <h2>Gallery</h2>
+        <div class="images">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Michael_Jackson_in_1988.jpg" alt="Michael Jackson">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Michael_Jackson_in_1984.jpg" alt="Michael Jackson">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Michael_Jackson_1995.jpg" alt="Michael Jackson">
+        </div>
+    </section>    
 
     <script>
         function playVideo(url) {
@@ -68,6 +93,15 @@
             // Append autoplay=1 to the URL
             iframe.src = url.includes('?') ? `${url}&autoplay=1` : `${url}?autoplay=1`;
         }
+        // Handle search for songs
+        function searchSong(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchQuery').value.trim();
+            if (query) {
+                const iframe = document.getElementById('search-result');
+                iframe.src = `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(query)}`;
+            }
+        }        
     </script>
 </body>
 </html>
