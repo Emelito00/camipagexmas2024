@@ -65,7 +65,8 @@
     <script>
         function playVideo(url) {
             const iframe = document.getElementById('video-player');
-            iframe.src = url;
+            // Append autoplay=1 to the URL
+            iframe.src = url.includes('?') ? `${url}&autoplay=1` : `${url}?autoplay=1`;
         }
     </script>
 </body>
