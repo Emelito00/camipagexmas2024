@@ -73,14 +73,10 @@
     <!-- Video Section -->
     <section id="videos">
         <h2>Watch Music Videos</h2>
-        <button onclick="playVideo('https://www.youtube.com/watch?v=xaYSqjvZjTs')">Chicago</button>
-        <button onclick="playVideo('https://www.youtube.com/watch?v=O89sPooBhyE')">I Saw Mommy Kissing Santa Claus</button>
-        <button onclick="playVideo('https://www.youtube.com/watch?v=F2AitTPI5U0?si=cMMRRdS-8E0J3Uwa')">Black & White</button>
-        <iframe id="video-player" width="560" height="315" src="" 
-            title="YouTube video player" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-        </iframe>
+        <button onclick="playVideo('xaYSqjvZjTs')">Chicago</button>
+        <button onclick="playVideo('O89sPooBhyE')">I Saw Mommy Kissing Santa Claus</button>
+        <button onclick="playVideo('F2AitTPI5U0')">Black & White</button>
+        <div id="video-player"></div>
     </section>
 
     <!-- Images Section -->
@@ -104,25 +100,14 @@
             // YouTube IFrame Player API ready function
         }
 
-        function getYouTubeVideoID(url) {
-            const regExp = /^.*(youtu.be\/|v\/|embed\/|watch\?v=|watch\?.+&v=)([^#&?]*).*/;
-            const match = url.match(regExp);
-            return (match && match[2].length === 11) ? match[2] : null;
-        }
-
-        function playVideo(url) {
-            const videoID = getYouTubeVideoID(url);
-            if (!videoID) {
-                alert("Invalid YouTube URL");
-                return;
-            }
+        function playVideo(videoId) {
             if (player) {
                 player.destroy();
             }
             player = new YT.Player('video-player', {
                 height: '315',
                 width: '560',
-                videoId: videoID,
+                videoId: videoId,
                 events: {
                     'onReady': onPlayerReady
                 }
