@@ -78,29 +78,6 @@
         </div>
     </section>
 
-    <script>
-        const images = [
-            'https://upload.wikimedia.org/wikipedia/commons/9/91/Michael_Jackson%2C_Victory_Tour%2C_Arrowhead_Stadium%2C_1984.jpg',
-            'https://upload.wikimedia.org/wikipedia/commons/e/e8/Michael_Jackson_1983_%28cropped%29.jpg',
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/MICHAEL_JACKSON_%285252255058%29.jpg/640px-MICHAEL_JACKSON_%285252255058%29.jpg'
-        ];
-        document.getElementById('michaelImage').src = images[Math.floor(Math.random() * images.length)];
-
-        function playVideo(url) {
-            const iframe = document.getElementById('video-player');
-            iframe.src = url.includes('?') ? `${url}&autoplay=1` : `${url}?autoplay=1`;
-        }
-
-        function searchSong(event) {
-            event.preventDefault();
-            const query = document.getElementById('searchQuery').value.trim();
-            if (query) {
-                const iframe = document.getElementById('search-result');
-                iframe.src = `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(query)}`;
-            }
-        }
-    </script>
-
     <!-- Video Section -->
     <section id="videos">
         <h2>Watch Music Videos</h2>
@@ -113,5 +90,58 @@
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
         </iframe>
     </section>
+
+    <script>
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            // YouTube IFrame Player API ready function
+        }
+
+        function playVideo(url) {
+            if (player) {
+                player.destroy();
+            }
+            player = new YT.Player('video-player', {
+                height: '315',
+                width: '560',
+                videoId: url.split('/').pop(),
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.setVolume(50); // Set volume to 50%
+            event.target.playVideo(); // Automatically play the video
+        }
+
+        // Array of image URLs
+        const images = [
+            'https://upload.wikimedia.org/wikipedia/commons/9/91/Michael_Jackson%2C_Victory_Tour%2C_Arrowhead_Stadium%2C_1984.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/e/e8/Michael_Jackson_1983_%28cropped%29.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/MICHAEL_JACKSON_%285252255058%29.jpg/640px-MICHAEL_JACKSON_%285252255058%29.jpg',
+            // Add more URLs as needed
+        ];
+
+        // Randomly select an image from the array
+        document.getElementById('michaelImage').src = images[Math.floor(Math.random() * images.length)];
+
+        function searchSong(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchQuery').value.trim();
+            if (query) {
+                const iframe = document.getElementById('search-result');
+                iframe.src = `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(query)}`;
+            }
+        }
+    </script>
 </body>
 </html>
